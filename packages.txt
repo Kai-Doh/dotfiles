@@ -5,7 +5,6 @@
 hyprland
 hyprpaper
 hyprlock
-hypridle
 xdg-desktop-portal-hyprland
 
 # ── Status bar ────────────────────────────────────────────────────────────────
@@ -27,17 +26,17 @@ libnotify
 
 # ── File manager & deps ───────────────────────────────────────────────────────
 yazi
-ffmpegthumbnailer
-unar
 fzf
 fd
 ripgrep
-zoxide
-imagemagick
-poppler
+zoxide              # yazi navigation integration
+ffmpegthumbnailer   # yazi: video thumbnails
+unar                # yazi: archive preview
+imagemagick         # yazi: image conversion
+poppler             # yazi: PDF preview
 
 # ── Wallpaper daemon ──────────────────────────────────────────────────────────
-swww
+awww                # wallpaper script uses awww/awww-daemon (not swww)
 
 # ── Color theme generation ────────────────────────────────────────────────────
 matugen
@@ -47,45 +46,44 @@ gtk3
 gtk4
 gsettings-desktop-schemas
 adwaita-icon-theme
-librsvg
+librsvg             # rsvg-convert: recolors nm-applet icons in wallpaper script
 
 # ── Audio ─────────────────────────────────────────────────────────────────────
 pipewire
 pipewire-pulse
 wireplumber
 pavucontrol
-playerctl
+playerctl           # waybar music module
 
 # ── Brightness ────────────────────────────────────────────────────────────────
 brightnessctl
 
 # ── Network ───────────────────────────────────────────────────────────────────
 networkmanager
-network-manager-applet
+network-manager-applet  # nm-applet: tray icon, recolored by wallpaper script
 
 # ── Screenshots & clipboard ───────────────────────────────────────────────────
-grim
-slurp
-wl-clipboard
-cliphist
+grim                # keybind: screenshot
+slurp               # keybind: area selection for screenshot
+wl-clipboard        # wl-copy/wl-paste: clipboard + cliphist integration
+cliphist            # keybind: clipboard history via rofi
 
 # ── Fonts ─────────────────────────────────────────────────────────────────────
-ttf-cascadia-code-nerd
-ttf-jetbrains-mono-nerd
+ttf-cascadia-code-nerd  # kitty, waybar, rofi
+ttf-jetbrains-mono-nerd # hyprlock
 
 # ── Session & polkit ─────────────────────────────────────────────────────────
-wlogout
-polkit-kde-agent
+wlogout             # waybar power button
+polkit-kde-agent    # autostart: /usr/lib/polkit-kde-authentication-agent-1
 
 # ── Media ─────────────────────────────────────────────────────────────────────
-mpv
+mpv                 # subtui audio backend
 
 # ── Audio visualizer ─────────────────────────────────────────────────────────
 cava
 
-# ── Misc tools ────────────────────────────────────────────────────────────────
-inotify-tools
+# ── Build & scripting ─────────────────────────────────────────────────────────
 git
 base-devel
 python
-python-gobject
+python-gobject      # keybinds-viewer.py (GTK4 app)
