@@ -1,0 +1,16 @@
+{{- $monitor := promptStringOnce . "monitor" "Monitor name (run: hyprctl monitors)" "eDP-1" -}}
+{{- $backlight := promptStringOnce . "backlight" "Backlight device (ls /sys/class/backlight/)" "intel_backlight" -}}
+{{- $timezone := promptStringOnce . "timezone" "Timezone" "Europe/Zurich" -}}
+
+{{/* Auto-detect Firefox profile, fall back to prompt */}}
+{{- $firefox := "" -}}
+{{- range glob (joinPath .chezmoi.homeDir ".mozilla/firefox/*.default-release") -}}
+{{-   $firefox = base . -}}
+{{- end -}}
+{{- $firefox = promptStringOnce . "firefox_profile" "Firefox profile dir name" $firefox -}}
+
+[data]
+    monitor         = {{ $monitor | quote }}
+    backlight       = {{ $backlight | quote }}
+    timezone        = {{ $timezone | quote }}
+    firefox_profile = {{ $firefox | quote }}

@@ -1,36 +1,40 @@
-# ── Credentials & secrets ─────────────────────────────────────────────────────
-config/subtui/credentials.toml
-config/sunshine/
+# Credentials — never commit
+dot_config/subtui/credentials.toml
+dot_config/sunshine/
 **/*.pem
 **/*.key
-**/*.p12
-**/*.crt
 
-# ── Browser data (passwords, cookies, profiles) ───────────────────────────────
-config/mozilla/
-config/zen/
+# Browser data
+dot_config/mozilla/
+dot_config/zen/
 
-# ── App state (auto-generated, not config) ────────────────────────────────────
-config/Notion/
-config/obsidian/
-config/vesktop/
-config/dconf/
-config/.claude/settings.local.json
-config/.claude/cache/
-config/.claude/daemon*
-config/session/
-config/htop/
-config/pulse/
-config/procps/
-config/Proton/
-config/go/
+# App state
+dot_config/Notion/
+dot_config/obsidian/
+dot_config/vesktop/
+dot_config/dconf/
+dot_config/session/
+dot_config/htop/
+dot_config/pulse/
+dot_config/procps/
+dot_config/Proton/
+dot_config/go/
 
-# ── Runtime state ─────────────────────────────────────────────────────────────
-config/hypr/.wallpaper
-config/hypr/hyprpaper.conf
-config/tmux-*.log
-config/tmux/plugins/
+# Claude Code machine-specific files
+dot_config/dot_claude/settings.local.json
+dot_config/dot_claude/cache/
+dot_config/dot_claude/daemon*
+dot_config/dot_claude/history*
+dot_config/dot_claude/sessions/
+dot_config/dot_claude/jobs/
+dot_config/dot_claude/plugins/
 
-# ── Python bytecode ───────────────────────────────────────────────────────────
+# Runtime state
+dot_config/hypr/.wallpaper
+dot_config/hypr/hyprpaper.conf
+dot_config/tmux-*.log
+dot_config/tmux/plugins/
+
+# Python bytecode
 **/__pycache__/
 **/*.pyc

@@ -1,0 +1,40 @@
+# Repo meta files — not dotfiles, should not land in ~/
+install.sh
+update.sh
+packages.txt
+README.md
+
+# Runtime state — managed by wallpaper script / apps
+.config/hypr/.wallpaper
+.config/hypr/hyprpaper.conf
+.config/tmux/plugins
+.cache/tmux
+
+# Credentials — never managed by chezmoi
+.config/subtui/credentials.toml
+.config/sunshine
+
+# Browser data
+.config/mozilla
+.config/zen
+
+# App state (not config)
+.config/Notion
+.config/obsidian
+.config/vesktop
+.config/dconf
+.config/session
+.config/htop
+.config/pulse
+.config/procps
+.config/Proton
+.config/go
+
+# Claude Code local settings (machine-specific)
+.config/.claude/settings.local.json
+.config/.claude/cache
+.config/.claude/daemon*
+.config/.claude/history*
+.config/.claude/sessions
+.config/.claude/jobs
+.config/.claude/plugins

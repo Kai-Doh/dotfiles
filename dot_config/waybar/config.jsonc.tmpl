@@ -10,7 +10,7 @@
          "sort-by-name": true,
          "format": " {name} ",
          "format-icons": {
-             "default": "",
+             "default": "",
          },
      },
     "tray": {
@@ -18,24 +18,24 @@
         "spacing": 10
     },
     "custom/music": {
-        "format": "  {}",
+        "format": "  {}",
         "escape": true,
         "interval": 5,
         "tooltip": false,
-        "exec": "playerctl metadata --format='{{ title }}'",
+        "exec": "playerctl metadata --format='{{ "{{" }} title {{ "}}" }}'",
         "on-click": "playerctl play-pause",
         "max-length": 50
     },
     "clock": {
-        "timezone": "Europe/Zurich",
+        "timezone": "{{ .timezone }}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": " {:%d/%m/%Y}",
-        "format": " {:%a %d  %H:%M}"
+        "format-alt": " {:%d/%m/%Y}",
+        "format": " {:%a %d  %H:%M}"
     },
     "backlight": {
-        "device": "intel_backlight",
+        "device": "{{ .backlight }}",
         "format": "{icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
     "battery": {
         "states": {
@@ -43,16 +43,16 @@
             "critical": 15
         },
         "format": "{icon}",
-        "format-charging": "",
-        "format-plugged": "",
+        "format-charging": "",
+        "format-plugged": "",
         "format-alt": "{icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", "", "", "", ""]
+        "format-icons": ["", "", "", "", "", "", "", "", "", "", "", ""]
     },
 "pulseaudio": {
         "format": "{icon} {volume}%",
-        "format-muted": "",
+        "format-muted": "",
         "format-icons": {
-            "default": ["", "", " "]
+            "default": ["", "", " "]
         },
         "on-click": "pavucontrol"
     },
@@ -67,11 +67,11 @@
     "custom/lock": {
         "tooltip": false,
         "on-click": "hyprlock",
-        "format": "",
+        "format": "",
     },
     "custom/power": {
         "tooltip": false,
         "on-click": "wlogout &",
-        "format": ""
+        "format": ""
     }
 }
