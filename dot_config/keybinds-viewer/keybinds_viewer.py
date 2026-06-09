@@ -12,7 +12,7 @@ from gi.repository import Gtk, Gdk, GLib, Pango
 COLORS_PATH = os.path.expanduser("~/.config/rofi/colors.rasi")
 APP_ID = "io.local.keybindsviewer"
 
-TABS = ["All", "Hyprland", "Tmux", "Neovim", "SubTUI", "Vimium"]
+TABS = ["All", "Hyprland", "Tmux", "Neovim", "SubTUI", "Vimium", "Yazi"]
 
 KEYBINDS = {
     "Hyprland": [
@@ -107,6 +107,30 @@ KEYBINDS = {
         ("f / F",               "Toggle / view favorites"),
         ("s",                   "Toggle notifications"),
         ("Ctrl+S",              "Create share link"),
+    ],
+    "Yazi": [
+        ("h / l",               "Go to parent / enter directory"),
+        ("j / k",               "Move down / up"),
+        ("gg / G",              "Jump to top / bottom"),
+        ("Enter",               "Open file"),
+        ("o",                   "Open with default app"),
+        ("Space",               "Toggle selection"),
+        ("v",                   "Visual select mode"),
+        ("y",                   "Yank (copy)"),
+        ("x",                   "Cut"),
+        ("p",                   "Paste"),
+        ("d",                   "Trash"),
+        ("D",                   "Delete permanently"),
+        ("r",                   "Rename"),
+        ("a",                   "Create file/directory"),
+        ("/",                   "Search"),
+        ("f",                   "Filter"),
+        ("s",                   "Sort"),
+        ("zh",                  "Toggle hidden files"),
+        ("~",                   "Go to home directory"),
+        ("-",                   "Go to previous directory"),
+        ("z",                   "Jump with zoxide"),
+        ("q",                   "Quit"),
     ],
     "Vimium": [
         ("?",                   "Show help / keybind list"),
