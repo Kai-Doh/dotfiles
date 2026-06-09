@@ -49,7 +49,17 @@ else
     echo "  Firefox profile detected: $FIREFOX_PROFILE"
 fi
 
-# ── 3. Symlink helper ─────────────────────────────────────────────────────────
+# ── 3. Save machine values for future updates ─────────────────────────────────
+cat > "$HOME/.dotfiles.local" <<EOF
+MONITOR="$MONITOR"
+BACKLIGHT="$BACKLIGHT"
+TIMEZONE="$TIMEZONE"
+FIREFOX_PROFILE="$FIREFOX_PROFILE"
+DOTFILES="$DOTFILES"
+EOF
+echo "==> Saved machine config to ~/.dotfiles.local"
+
+# ── 4. Symlink helper ─────────────────────────────────────────────────────────
 link_file() {
     local src="$DOTFILES/$1" dst="$2"
     mkdir -p "$(dirname "$dst")"
@@ -61,7 +71,7 @@ link_file() {
     ln -sf "$src" "$dst"
 }
 
-# ── 4. Symlink configs ────────────────────────────────────────────────────────
+# ── 5. Symlink configs ────────────────────────────────────────────────────────
 echo ""
 echo "==> Symlinking configs..."
 
@@ -92,7 +102,7 @@ for s in wallpaper restore-wallpaper tmux-safe-save tmux-validate-save; do
     chmod +x "$DOTFILES/local/bin/$s"
 done
 
-# ── 5. Generate hyprpaper.conf from template ──────────────────────────────────
+# ── 6. Generate hyprpaper.conf from template ──────────────────────────────────
 echo "==> Generating hyprpaper.conf..."
 sed \
     -e "s|__HOME__|$HOME|g" \
@@ -100,7 +110,7 @@ sed \
     "$DOTFILES/config/hypr/hyprpaper.conf.template" \
     > "$HOME/.config/hypr/hyprpaper.conf"
 
-# ── 6. Patch machine-specific values into symlinked files ─────────────────────
+# ── 7. Patch machine-specific values into symlinked files ─────────────────────
 echo "==> Patching machine-specific values..."
 
 # Firefox profile in matugen config (patches repo file via symlink)
@@ -115,7 +125,7 @@ sed -i "s|intel_backlight|$BACKLIGHT|g" \
 sed -i "s|Europe/Zurich|$TIMEZONE|g" \
     "$HOME/.config/waybar/config.jsonc"
 
-# ── 7. Bootstrap tmux plugin manager ─────────────────────────────────────────
+# ── 8. Bootstrap tmux plugin manager ─────────────────────────────────────────
 TPM="$HOME/.config/tmux/plugins/tpm"
 if [[ ! -d "$TPM" ]]; then
     echo "==> Cloning tpm..."
@@ -123,7 +133,7 @@ if [[ ! -d "$TPM" ]]; then
 fi
 mkdir -p "$HOME/.cache/tmux"
 
-# ── 8. Subtui credentials ─────────────────────────────────────────────────────
+# ── 9. Subtui credentials ─────────────────────────────────────────────────────
 CREDS="$HOME/.config/subtui/credentials.toml"
 if [[ ! -f "$CREDS" ]]; then
     mkdir -p "$HOME/.config/subtui"
@@ -131,12 +141,12 @@ if [[ ! -f "$CREDS" ]]; then
     echo "==> Created $CREDS — edit it with your Navidrome credentials."
 fi
 
-# ── 9. Enable systemd user services ──────────────────────────────────────────
+# ── 10. Enable systemd user services ─────────────────────────────────────────
 echo "==> Enabling systemd user services..."
 systemctl --user daemon-reload
 systemctl --user enable --now waybar.service tmux.service
 
-# ── 10. First wallpaper run ───────────────────────────────────────────────────
+# ── 11. First wallpaper run ───────────────────────────────────────────────────
 DEFAULT_WALL="$HOME/Pictures/Wallpapers/nebula.jpg"
 if [[ -f "$DEFAULT_WALL" ]]; then
     echo "==> Running wallpaper to generate initial color theme..."
