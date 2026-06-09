@@ -1,0 +1,91 @@
+# Dotfiles packages — install with: yay -S --needed - < packages.txt
+# Lines starting with # are ignored by yay/pacman
+
+# ── Compositor & Wayland ──────────────────────────────────────────────────────
+hyprland
+hyprpaper
+hyprlock
+hypridle
+xdg-desktop-portal-hyprland
+
+# ── Status bar ────────────────────────────────────────────────────────────────
+waybar
+
+# ── Terminal & multiplexer ────────────────────────────────────────────────────
+kitty
+tmux
+
+# ── Editor ────────────────────────────────────────────────────────────────────
+neovim
+
+# ── Launcher ──────────────────────────────────────────────────────────────────
+rofi-wayland
+
+# ── Notifications ─────────────────────────────────────────────────────────────
+dunst
+libnotify
+
+# ── File manager & deps ───────────────────────────────────────────────────────
+yazi
+ffmpegthumbnailer
+unar
+fzf
+fd
+ripgrep
+zoxide
+imagemagick
+poppler
+
+# ── Wallpaper daemon ──────────────────────────────────────────────────────────
+swww
+
+# ── Color theme generation ────────────────────────────────────────────────────
+matugen
+
+# ── GTK & theming ────────────────────────────────────────────────────────────
+gtk3
+gtk4
+gsettings-desktop-schemas
+adwaita-icon-theme
+librsvg
+
+# ── Audio ─────────────────────────────────────────────────────────────────────
+pipewire
+pipewire-pulse
+wireplumber
+pavucontrol
+playerctl
+
+# ── Brightness ────────────────────────────────────────────────────────────────
+brightnessctl
+
+# ── Network ───────────────────────────────────────────────────────────────────
+networkmanager
+network-manager-applet
+
+# ── Screenshots & clipboard ───────────────────────────────────────────────────
+grim
+slurp
+wl-clipboard
+cliphist
+
+# ── Fonts ─────────────────────────────────────────────────────────────────────
+ttf-cascadia-code-nerd
+ttf-jetbrains-mono-nerd
+
+# ── Session & polkit ─────────────────────────────────────────────────────────
+wlogout
+polkit-kde-agent
+
+# ── Media ─────────────────────────────────────────────────────────────────────
+mpv
+
+# ── Audio visualizer ─────────────────────────────────────────────────────────
+cava
+
+# ── Misc tools ────────────────────────────────────────────────────────────────
+inotify-tools
+git
+base-devel
+python
+python-gobject

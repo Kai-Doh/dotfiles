@@ -1,0 +1,16 @@
+#!/bin/bash
+RESURRECT_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/tmux/resurrect"
+LAST="$RESURRECT_DIR/last"
+
+[ -L "$LAST" ] || exit 0
+
+LAST_TARGET="$(readlink -f "$LAST")"
+
+[ -s "$LAST_TARGET" ] && exit 0  # file has content, nothing to do
+
+# Empty save — remove it and relink to most recent non-empty file
+rm -f "$LAST_TARGET"
+BEST=$(ls -t "$RESURRECT_DIR"/tmux_resurrect_*.txt 2>/dev/null | while read f; do
+    [ -s "$f" ] && echo "$f" && break
+done)
+[ -n "$BEST" ] && ln -sf "$(basename "$BEST")" "$LAST"

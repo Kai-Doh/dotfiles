@@ -1,0 +1,98 @@
+@import "colors"
+
+* {
+    background-color: transparent;
+    text-color: @text;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+window {
+    background-color: @base;
+    border: 2px;
+    border-color: @blue;
+    border-radius: 12px;
+    width: 380px;
+    location: northeast;
+    anchor: northeast;
+    x-offset: -10px;
+    y-offset: 40px;
+}
+
+mainbox {
+    padding: 10px;
+    spacing: 6px;
+}
+
+inputbar {
+    background-color: @surface0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    spacing: 8px;
+    children: [prompt, entry];
+}
+
+prompt {
+    color: @blue;
+}
+
+entry {
+    color: @text;
+    placeholder: "Search...";
+    placeholder-color: @overlay0;
+}
+
+listview {
+    lines: 10;
+    scrollbar: false;
+    spacing: 2px;
+}
+
+element {
+    background-color: transparent;
+    border-radius: 8px;
+    padding: 6px 10px;
+}
+
+element selected {
+    background-color: @surface0;
+    text-color: @blue;
+}
+
+element active,
+element active selected,
+element urgent,
+element urgent selected {
+    border: 0 0 0 3px;
+    border-radius: 0 8px 8px 0;
+    padding: 6px 10px 6px 7px;
+}
+
+element active {
+    border-color: @green;
+    text-color: @green;
+}
+
+element active selected {
+    background-color: @surface0;
+    border-color: @green;
+    text-color: @green;
+}
+
+element urgent {
+    border-color: @red;
+    text-color: @red;
+}
+
+element urgent selected {
+    background-color: @surface0;
+    border-color: @red;
+    text-color: @red;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+}

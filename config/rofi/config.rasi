@@ -1,0 +1,97 @@
+@import "colors"
+
+* {
+    /* Override rofi's built-in Solarized state vars */
+    background:                  @base;
+    foreground:                  @text;
+    lightbg:                     @surface0;
+    lightfg:                     @overlay0;
+
+    normal-background:           transparent;
+    normal-foreground:           @text;
+    alternate-normal-background: transparent;
+    alternate-normal-foreground: @subtext0;
+    selected-normal-background:  @surface0;
+    selected-normal-foreground:  @blue;
+
+    active-background:           transparent;
+    active-foreground:           @green;
+    alternate-active-background: transparent;
+    alternate-active-foreground: @green;
+    selected-active-background:  @surface0;
+    selected-active-foreground:  @green;
+
+    urgent-background:           transparent;
+    urgent-foreground:           @red;
+    alternate-urgent-background: transparent;
+    alternate-urgent-foreground: @red;
+    selected-urgent-background:  @surface0;
+    selected-urgent-foreground:  @red;
+
+    separatorcolor:              @surface1;
+
+    /* Defaults */
+    background-color:            transparent;
+    text-color:                  @text;
+    border:                      0;
+    margin:                      0;
+    padding:                     0;
+    spacing:                     0;
+}
+
+window {
+    background-color: @base;
+    border:           2px;
+    border-color:     @mauve;
+    border-radius:    12px;
+    width:            600px;
+    font:             "CaskaydiaMono Nerd Font 12";
+}
+
+mainbox {
+    padding: 12px;
+    spacing: 8px;
+}
+
+inputbar {
+    background-color: @surface0;
+    border-radius:    8px;
+    padding:          10px 14px;
+    spacing:          8px;
+    children:         [prompt, entry];
+}
+
+prompt {
+    color:      @blue;
+    text-color: @blue;
+}
+
+entry {
+    color:             @text;
+    text-color:        @text;
+    placeholder:       "Search...";
+    placeholder-color: @overlay0;
+}
+
+listview {
+    lines:     10;
+    scrollbar: false;
+    spacing:   2px;
+}
+
+element {
+    background-color: transparent;
+    border-radius:    8px;
+    padding:          8px 12px;
+    spacing:          5px;
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+}
+
+element-icon {
+    background-color: transparent;
+    text-color:       inherit;
+}

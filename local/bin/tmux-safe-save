@@ -1,0 +1,3 @@
+#!/bin/bash
+~/.config/tmux/plugins/tmux-resurrect/scripts/save.sh
+~/.local/bin/tmux-validate-save

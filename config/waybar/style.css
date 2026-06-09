@@ -1,0 +1,107 @@
+@import "colors.css";
+
+* {
+  font-family: CaskaydiaMono Nerd Font;
+  font-size: 15px;
+  min-height: 0;
+}
+
+#waybar {
+  background-color: @base;
+  color: @text;
+  border-bottom: 2px solid @surface1;
+  opacity: 0.85;
+}
+
+#workspaces {
+  margin: 0;
+  background-color: transparent;
+}
+
+#workspaces button {
+  color: @blue;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0.25rem 0.6rem;
+  box-shadow: none;
+}
+
+#workspaces button.active {
+  color: @blue;
+  box-shadow: inset 0 -2px @blue;
+}
+
+#workspaces button:hover {
+  color: @blue;
+  box-shadow: inset 0 -2px @blue;
+}
+
+#custom-music,
+#custom-updates,
+#tray,
+#backlight,
+#clock,
+#battery,
+#pulseaudio,
+#custom-lock,
+#custom-power {
+  background-color: transparent;
+  padding: 0.3rem 0.8rem;
+  margin: 0;
+  border-radius: 0;
+}
+
+#clock {
+  color: @blue;
+}
+
+#battery {
+  color: @blue;
+}
+
+#battery.charging {
+  color: @blue;
+}
+
+#battery.warning:not(.charging) {
+  color: @red;
+}
+
+#backlight {
+  color: @blue;
+}
+
+#pulseaudio {
+  color: @blue;
+}
+
+#custom-music {
+  color: @mauve;
+}
+
+#custom-updates {
+  color: @blue;
+}
+
+#custom-lock {
+  color: @blue;
+}
+
+#custom-power {
+  color: @blue;
+}
+
+#tray {
+  border-radius: 0;
+}
+
+tooltip {
+  background-color: @surface0;
+  border: 1px solid @overlay0;
+  border-radius: 8px;
+}
+
+tooltip label {
+  color: @text;
+}

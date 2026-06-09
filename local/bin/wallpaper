@@ -1,0 +1,63 @@
+#!/bin/bash
+
+WALL="${1:-}"
+
+if [[ -z "$WALL" || ! -f "$WALL" ]]; then
+    echo "Usage: wallpaper <path-to-image>"
+    exit 1
+fi
+
+WALL="$(realpath "$WALL")"
+echo "$WALL" > ~/.config/hypr/.wallpaper
+
+# Generate colors
+matugen image "$WALL" --prefer saturation --type scheme-fidelity --lightness-dark 0.15
+
+# Inject wallpaper path into hyprlock (matugen just overwrote the file from template)
+sed -i "s|path =.*|path = $WALL|" ~/.config/hypr/hyprlock.conf
+
+COLORS=~/.config/hypr/user/colors.lua
+PRIMARY=$(grep 'primaryAlpha'   "$COLORS" | grep -o '"[^"]*"' | tr -d '"')
+SECONDARY=$(grep 'secondaryAlpha' "$COLORS" | grep -o '"[^"]*"' | tr -d '"')
+SURFACE=$(grep 'surfaceAlpha'   "$COLORS" | grep -o '"[^"]*"' | tr -d '"')
+
+# Apply border colors and wallpaper at runtime
+if pgrep -x Hyprland &>/dev/null; then
+    hyprctl eval "hl.config({general = {col = {active_border = {colors = {\"rgba(${PRIMARY}ee)\", \"rgba(${SECONDARY}ee)\"}, angle = 45}, inactive_border = \"rgba(${SURFACE}aa)\"}}})" &>/dev/null || true
+    hyprctl keyword misc:background_color "0x${SURFACE:0:6}" &>/dev/null || true
+    pgrep -x awww-daemon &>/dev/null || { awww-daemon &>/dev/null & until awww query &>/dev/null; do sleep 0.1; done; }
+    awww img "$WALL" --transition-type wipe --transition-duration 0.5 &>/dev/null || true
+fi
+
+# Apply GTK theme (Adwaita base so gtk.css user stylesheet isn't overridden)
+gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark' 2>/dev/null || true
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' 2>/dev/null || true
+
+# Recolor nm-applet WiFi icons — skip if color unchanged
+ICON_BASE="$HOME/.local/share/icons/hicolor"
+ICON_COLOR_CACHE="$HOME/.cache/nm-icon-color"
+if [[ "$(cat "$ICON_COLOR_CACHE" 2>/dev/null)" != "$PRIMARY" ]]; then
+    for svg in "$ICON_BASE/scalable/apps"/nm-*.svg; do
+        [[ -f "$svg" ]] || continue
+        sed -i "s/fill=\"#[0-9a-fA-F]\{6\}\"/fill=\"#${PRIMARY}\"/g" "$svg"
+        name=$(basename "$svg" .svg)
+        rsvg-convert -w 22 -h 22 "$svg" -o "$ICON_BASE/22x22/apps/${name}.png" 2>/dev/null &
+    done
+    for svg in "$ICON_BASE/scalable/status"/nm-*.svg; do
+        [[ -f "$svg" ]] && sed -i "s/fill=\"#[0-9a-fA-F]\{6\}\"/fill=\"#${PRIMARY}\"/g" "$svg"
+    done
+    wait
+    cp "$ICON_BASE"/22x22/apps/nm-*.png "$ICON_BASE/22x22/status/" 2>/dev/null
+    gtk-update-icon-cache -f "$ICON_BASE/" &>/dev/null || true
+    echo "$PRIMARY" > "$ICON_COLOR_CACHE"
+    pkill nm-applet 2>/dev/null || true
+    while pgrep -x nm-applet &>/dev/null; do sleep 0.1; done
+    nm-applet --indicator &>/dev/null &
+fi
+
+# Reload waybar, kitty, yazi, dunst, and tmux
+systemctl --user restart waybar &>/dev/null || true
+pkill -USR1 kitty 2>/dev/null || true
+pkill yazi 2>/dev/null || true   # no hot-reload; close so next open picks up new theme
+systemctl --user reload dunst &>/dev/null || true
+pgrep -x tmux &>/dev/null && tmux source-file ~/.cache/tmux/tmux_colors.conf 2>/dev/null || true

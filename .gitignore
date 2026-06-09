@@ -1,0 +1,34 @@
+# ── Credentials & secrets ─────────────────────────────────────────────────────
+config/subtui/credentials.toml
+config/sunshine/
+**/*.pem
+**/*.key
+**/*.p12
+**/*.crt
+
+# ── Browser data (passwords, cookies, profiles) ───────────────────────────────
+config/mozilla/
+config/zen/
+
+# ── App state (auto-generated, not config) ────────────────────────────────────
+config/Notion/
+config/obsidian/
+config/vesktop/
+config/dconf/
+config/.claude/
+config/session/
+config/htop/
+config/pulse/
+config/procps/
+config/Proton/
+config/go/
+
+# ── Runtime state ─────────────────────────────────────────────────────────────
+config/hypr/.wallpaper
+config/hypr/hyprpaper.conf
+config/tmux-*.log
+config/tmux/plugins/
+
+# ── Python bytecode ───────────────────────────────────────────────────────────
+**/__pycache__/
+**/*.pyc

@@ -1,0 +1,21 @@
+#!/bin/bash
+LOG="/tmp/restore-wallpaper.log"
+exec > "$LOG" 2>&1
+
+echo "[$(date)] restore-wallpaper started, HYPRLAND_INSTANCE_SIGNATURE=${HYPRLAND_INSTANCE_SIGNATURE:-UNSET}"
+
+WALL="$(cat "$HOME/.config/hypr/.wallpaper" 2>/dev/null)"
+echo "[$(date)] WALL=$WALL"
+
+[[ -z "$WALL" || ! -f "$WALL" ]] && echo "wallpaper file missing, exit" && exit 0
+
+# Poll until awww-daemon is ready (max 5s)
+count=0
+until awww query &>/dev/null || (( count >= 50 )); do
+    sleep 0.1
+    (( count++ ))
+done
+
+echo "[$(date)] setting wallpaper"
+awww img "$WALL" --transition-type none
+echo "[$(date)] done"
