@@ -15,7 +15,9 @@ config/Notion/
 config/obsidian/
 config/vesktop/
 config/dconf/
-config/.claude/
+config/.claude/settings.local.json
+config/.claude/cache/
+config/.claude/daemon*
 config/session/
 config/htop/
 config/pulse/
