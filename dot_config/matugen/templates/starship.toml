@@ -18,7 +18,7 @@ error        = '{{colors.error.default.hex}}'
 
 [directory]
 style = "bg:primary fg:on_primary"
-format = '[](fg:primary)[ 󰉋 $path ]($style)[](fg:primary) '
+format = '[](fg:primary)[ 󰉋 $path ]($style)[](fg:primary) '
 truncation_length = 3
 truncate_to_repo = true
 
@@ -29,18 +29,18 @@ truncate_to_repo = true
 "Pictures" = " "
 
 [git_branch]
-symbol = ""
+symbol = ""
 style = "bg:secondary fg:on_secondary"
-format = '[](fg:secondary)[ $symbol $branch ]($style)[](fg:secondary) '
+format = '[](fg:secondary)[ $symbol $branch ]($style)[](fg:secondary) '
 
 [git_status]
 style = "bg:secondary fg:on_secondary"
-format = '[](fg:secondary)[$all_status$ahead_behind ]($style)[](fg:secondary) '
+format = '[](fg:secondary)[$all_status$ahead_behind ]($style)[](fg:secondary) '
 
 [cmd_duration]
 min_time = 2000
 style = "bg:tertiary fg:on_tertiary"
-format = '[](fg:tertiary)[ 󱦟 $duration ]($style)[](fg:tertiary) '
+format = '[](fg:tertiary)[ 󱦟 $duration ]($style)[](fg:tertiary) '
 
 [character]
 success_symbol = '[➜](bold fg:primary)'
