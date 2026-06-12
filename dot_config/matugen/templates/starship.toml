@@ -18,7 +18,7 @@ error        = '{{colors.error.default.hex}}'
 
 [directory]
 style = "bg:primary fg:on_primary"
-format = '[](fg:primary)[ 󰉋 $path ]($style)[](fg:primary) '
+format = '[](fg:primary)[  $path ]($style)[](fg:primary) '
 truncation_length = 3
 truncate_to_repo = true
 
