@@ -31,7 +31,7 @@ fi
 
 # Verify critical commands
 MISSING=()
-for cmd in hyprctl matugen waybar kitty tmux nvim rofi dunst awww playerctl brightnessctl; do
+for cmd in hyprctl matugen qs kitty tmux nvim rofi awww playerctl brightnessctl nmcli; do
     command -v "$cmd" &>/dev/null || MISSING+=("$cmd")
 done
 [[ ${#MISSING[@]} -gt 0 ]] && \
@@ -62,7 +62,11 @@ fi
 # ── 7. Systemd user services ──────────────────────────────────────────────────
 echo "==> Enabling systemd user services..."
 systemctl --user daemon-reload
-systemctl --user enable --now waybar.service tmux.service sunshine-lid-guard.service
+# Quickshell replaces waybar (top bar) and dunst (notification server). Mask
+# dunst so dbus can't reactivate it and fight quickshell for the notification
+# bus (org.freedesktop.Notifications). Reverse with: systemctl --user unmask dunst.service
+systemctl --user mask dunst.service
+systemctl --user enable --now tmux.service sunshine-lid-guard.service
 
 # ── 8. First wallpaper run ────────────────────────────────────────────────────
 WALL="$HOME/Pictures/Wallpapers/nebula.jpg"
