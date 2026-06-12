@@ -73,7 +73,7 @@ wl-clipboard        # wl-copy/wl-paste: clipboard + cliphist integration
 cliphist            # keybind: clipboard history via rofi
 
 # ── Fonts ─────────────────────────────────────────────────────────────────────
-ttf-cascadia-code-nerd  # kitty, quickshell, rofi
+ttf-cascadia-mono-nerd  # CaskaydiaMono Nerd Font: kitty, quickshell, rofi
 ttf-jetbrains-mono-nerd # hyprlock
 
 # ── Session & polkit ─────────────────────────────────────────────────────────
