@@ -8,7 +8,7 @@ hyprlock
 xdg-desktop-portal-hyprland
 
 # ── Status bar & shell ────────────────────────────────────────────────────────
-quickshell          # top bar + Claude sidebar (~/.config/quickshell)
+quickshell          # bar + control center + notifications + Claude sidebar (~/.config/quickshell)
 
 # ── Terminal & multiplexer ────────────────────────────────────────────────────
 kitty
@@ -51,7 +51,6 @@ gtk3
 gtk4
 gsettings-desktop-schemas
 adwaita-icon-theme
-librsvg             # rsvg-convert: recolors nm-applet icons in wallpaper script
 
 # ── Audio ─────────────────────────────────────────────────────────────────────
 pipewire
@@ -65,7 +64,7 @@ brightnessctl
 
 # ── Network ───────────────────────────────────────────────────────────────────
 networkmanager
-network-manager-applet  # nm-applet: tray icon, recolored by wallpaper script
+network-manager-applet  # nm-connection-editor: GUI fallback (control center handles wifi/bt)
 
 # ── Screenshots & clipboard ───────────────────────────────────────────────────
 grim                # keybind: screenshot
@@ -74,11 +73,11 @@ wl-clipboard        # wl-copy/wl-paste: clipboard + cliphist integration
 cliphist            # keybind: clipboard history via rofi
 
 # ── Fonts ─────────────────────────────────────────────────────────────────────
-ttf-cascadia-code-nerd  # kitty, waybar, rofi
+ttf-cascadia-code-nerd  # kitty, quickshell, rofi
 ttf-jetbrains-mono-nerd # hyprlock
 
 # ── Session & polkit ─────────────────────────────────────────────────────────
-wlogout             # waybar power button
+wlogout             # quickshell power button (bar + control center)
 polkit-kde-agent    # autostart: /usr/lib/polkit-kde-authentication-agent-1
 
 # ── Media ─────────────────────────────────────────────────────────────────────

@@ -33,31 +33,9 @@ fi
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark' 2>/dev/null || true
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' 2>/dev/null || true
 
-# Recolor nm-applet WiFi icons — skip if color unchanged
-ICON_BASE="$HOME/.local/share/icons/hicolor"
-ICON_COLOR_CACHE="$HOME/.cache/nm-icon-color"
-if [[ "$(cat "$ICON_COLOR_CACHE" 2>/dev/null)" != "$PRIMARY" ]]; then
-    for svg in "$ICON_BASE/scalable/apps"/nm-*.svg; do
-        [[ -f "$svg" ]] || continue
-        sed -i "s/fill=\"#[0-9a-fA-F]\{6\}\"/fill=\"#${PRIMARY}\"/g" "$svg"
-        name=$(basename "$svg" .svg)
-        rsvg-convert -w 22 -h 22 "$svg" -o "$ICON_BASE/22x22/apps/${name}.png" 2>/dev/null &
-    done
-    for svg in "$ICON_BASE/scalable/status"/nm-*.svg; do
-        [[ -f "$svg" ]] && sed -i "s/fill=\"#[0-9a-fA-F]\{6\}\"/fill=\"#${PRIMARY}\"/g" "$svg"
-    done
-    wait
-    cp "$ICON_BASE"/22x22/apps/nm-*.png "$ICON_BASE/22x22/status/" 2>/dev/null
-    gtk-update-icon-cache -f "$ICON_BASE/" &>/dev/null || true
-    echo "$PRIMARY" > "$ICON_COLOR_CACHE"
-    pkill nm-applet 2>/dev/null || true
-    while pgrep -x nm-applet &>/dev/null; do sleep 0.1; done
-    nm-applet --indicator &>/dev/null &
-fi
-
-# Reload kitty, yazi, dunst, and tmux
-# (The Quickshell bar/sidebar hot-reload automatically when Colors.qml changes.)
+# Reload kitty, yazi, and tmux.
+# (The Quickshell bar/sidebar/control center hot-reload automatically when
+#  Colors.qml changes; notifications are handled by Quickshell, not dunst.)
 pkill -USR1 kitty 2>/dev/null || true
 pkill yazi 2>/dev/null || true   # no hot-reload; close so next open picks up new theme
-systemctl --user reload dunst &>/dev/null || true
 pgrep -x tmux &>/dev/null && tmux source-file ~/.cache/tmux/tmux_colors.conf 2>/dev/null || true
