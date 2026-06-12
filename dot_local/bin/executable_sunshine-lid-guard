@@ -12,13 +12,34 @@ set -uo pipefail
 flag="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/sunshine-streaming"
 ac_online="/sys/class/power_supply/AC/online"
 lid_state="/proc/acpi/button/lid/LID/state"
+backlight_dev="intel_backlight"
 grace_period=60
 
 inhibit_pid=""
 ac_lost_at=""
+saved_brightness=""
+
+# Kill the panel backlight while the lid is closed during streaming, then
+# restore it. The backlight is the real heat/power draw; the Moonlight stream
+# is unaffected because Sunshine captures the compositor framebuffer, not the
+# backlight. (Do NOT use "hyprctl dispatch dpms off" here: that stops Hyprland
+# compositing eDP-1 and would freeze the stream.)
+backlight_off() {
+    if [[ -z "$saved_brightness" ]]; then
+        saved_brightness=$(brightnessctl -d "$backlight_dev" get 2>/dev/null)
+        brightnessctl -d "$backlight_dev" set 0 >/dev/null 2>&1
+    fi
+}
+backlight_restore() {
+    if [[ -n "$saved_brightness" ]]; then
+        brightnessctl -d "$backlight_dev" set "$saved_brightness" >/dev/null 2>&1
+        saved_brightness=""
+    fi
+}
 
 cleanup() {
     [[ -n "$inhibit_pid" ]] && kill "$inhibit_pid" 2>/dev/null
+    backlight_restore
 }
 trap cleanup EXIT
 
@@ -26,6 +47,15 @@ while true; do
     on_ac=$(cat "$ac_online" 2>/dev/null || echo 0)
     streaming=0
     [[ -e "$flag" ]] && streaming=1
+    lid=$(cat "$lid_state" 2>/dev/null)
+
+    # Turn the backlight off only while streaming on AC with the lid closed;
+    # restore it the moment any of those conditions clears.
+    if [[ "$on_ac" == "1" && "$streaming" == "1" && "$lid" == *closed* ]]; then
+        backlight_off
+    else
+        backlight_restore
+    fi
 
     if [[ "$on_ac" == "1" ]]; then
         if [[ -n "$ac_lost_at" ]]; then
@@ -65,7 +95,6 @@ while true; do
                     "Streaming on battery now. If the lid is closed and power isn't restored within ${grace_period}s, the laptop will suspend."
             else
                 elapsed=$((now - ac_lost_at))
-                lid=$(cat "$lid_state" 2>/dev/null)
                 if (( elapsed >= grace_period )) && [[ "$lid" == *closed* ]]; then
                     notify-send -u critical "Sunshine: Suspending" \
                         "AC power not restored within ${grace_period}s while lid closed - suspending now."
@@ -78,5 +107,5 @@ while true; do
         fi
     fi
 
-    sleep 5
+    sleep 2
 done
