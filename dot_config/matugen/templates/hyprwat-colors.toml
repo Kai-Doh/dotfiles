@@ -1,9 +1,0 @@
-[theme]
-font_color = {{colors.on_surface.default.hex}}
-background_color = {{colors.surface.default.hex}}
-border_color = {{colors.primary.default.hex}}ff
-hover_color = {{colors.primary.default.hex}}ff
-active_color = {{colors.secondary.default.hex}}66
-window_rounding = 12.0
-frame_rounding = 8.0
-background_blur = 0.9

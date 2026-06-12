@@ -9,7 +9,6 @@ xdg-desktop-portal-hyprland
 
 # ── Status bar & shell ────────────────────────────────────────────────────────
 quickshell          # top bar + Claude sidebar (~/.config/quickshell)
-hyprwat-bin         # themed popup menus: brightness + volume click targets
 
 # ── Terminal & multiplexer ────────────────────────────────────────────────────
 kitty
@@ -60,7 +59,7 @@ pipewire
 pipewire-pulse
 wireplumber
 pavucontrol
-playerctl           # waybar music module
+playerctl           # media-key bindings (XF86Audio*)
 
 # ── Brightness ────────────────────────────────────────────────────────────────
 brightnessctl
