@@ -68,3 +68,8 @@ post_hook   = "pywalfox update"
 [templates.starship]
 input_path  = "~/.config/matugen/templates/starship.toml"
 output_path = "~/.config/starship.toml"
+
+[templates.btop]
+input_path  = "~/.config/matugen/templates/btop.theme"
+output_path = "~/.config/btop/themes/matugen.theme"
+post_hook   = "pkill -USR2 btop || true"
