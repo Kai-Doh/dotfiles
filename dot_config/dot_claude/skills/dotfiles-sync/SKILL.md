@@ -7,7 +7,7 @@ description: Use when the user wants to sync, update, or push changes to their d
 
 Dotfiles are managed with **chezmoi**. The source repo is at `github.com/Kai-Doh/dotfiles` (public).
 
-- Chezmoi's local source dir: `~/.local/share/chezmoi/`
+- Chezmoi's local source dir: `~/dotfiles/` (don't assume the default `~/.local/share/chezmoi`; resolve it with `chezmoi source-path` or just `chezmoi cd`)
 - Applied configs live at their normal locations (`~/.config/`, `~/.bashrc`, etc.)
 - Machine-specific values (monitor, backlight, timezone, Firefox profile) live in `~/.config/chezmoi/chezmoi.toml` — set once at install, never committed.
 
@@ -50,7 +50,7 @@ Chezmoi moves the dir into its source and manages it from that point on.
 
 If the new app needs a package, add it to `packages.txt` manually:
 ```bash
-echo "newpackage" >> ~/.local/share/chezmoi/packages.txt
+echo "newpackage" >> ~/dotfiles/packages.txt
 ```
 
 ### 4. Handle new matugen templates
@@ -64,7 +64,7 @@ Also re-add `~/.config/matugen/config.toml` if a new `[templates.xxx]` entry was
 ### 5. Commit and push
 
 ```bash
-chezmoi cd   # enters ~/.local/share/chezmoi/
+chezmoi cd   # enters the source dir (~/dotfiles)
 git add .
 git commit -m "<descriptive message>
 
