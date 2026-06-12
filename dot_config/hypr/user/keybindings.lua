@@ -25,6 +25,9 @@ hl.bind(mainMod .. " + K", hl.dsp.exec_cmd("python3 ~/.config/keybinds-viewer/ke
 -- Claude sidebar (quickshell)
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("qs ipc call sidebar toggle"))
 
+-- Control center (quickshell)
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("qs ipc call controlcenter toggle"))
+
 -- Move focus
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left"  }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))

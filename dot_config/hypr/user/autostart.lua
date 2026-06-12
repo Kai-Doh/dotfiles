@@ -13,8 +13,8 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("awww-daemon")
     hl.exec_cmd("/home/kai/.local/bin/restore-wallpaper")
 
-    -- Network Manager tray applet
-    hl.exec_cmd("nm-applet --indicator")
+    -- Network status is shown natively in the quickshell bar (Network.qml),
+    -- replacing the nm-applet tray icon.
 
     -- Claude sidebar (quickshell); toggle with Super+A
     hl.exec_cmd("qs")

@@ -57,8 +57,8 @@ PanelWindow {
         spacing: 8
 
         Music { colors: c }
+        Network { colors: c }
         Volume { colors: c }
-        Brightness { colors: c }
         Battery { colors: c }
         Updates { colors: c }
         Tray { colors: c; barWindow: bar }
