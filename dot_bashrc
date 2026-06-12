@@ -34,3 +34,5 @@ tmux() {
     command tmux attach -t "$choice"
   fi
 }
+
+. "$HOME/.local/share/../bin/env"
