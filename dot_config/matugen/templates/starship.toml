@@ -35,7 +35,7 @@ format = '[](fg:secondary)[ $symbol $branch ]($style)[](fg:secondary) '
 
 [git_status]
 style = "bg:secondary fg:on_secondary"
-format = '[](fg:secondary)[$all_status$ahead_behind ]($style)[](fg:secondary) '
+format = '[](fg:secondary)[ $all_status$ahead_behind ]($style)[](fg:secondary) '
 ahead = "⇡${count}"
 behind = "⇣${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
