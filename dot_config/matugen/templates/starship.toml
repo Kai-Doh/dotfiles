@@ -29,7 +29,7 @@ truncate_to_repo = true
 "Pictures" = " "
 
 [git_branch]
-symbol = ""
+symbol = ""
 style = "bg:secondary fg:on_secondary"
 format = '[](fg:secondary)[ $symbol $branch ]($style)[](fg:secondary) '
 
