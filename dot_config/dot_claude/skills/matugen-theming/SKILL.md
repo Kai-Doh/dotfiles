@@ -11,7 +11,7 @@ This system has a wrapper script, `wallpaper <path-to-image>` (at `~/.local/bin/
 - Sets the wallpaper itself via `awww`
 - Patches `hyprlock.conf` with the new wallpaper path, reapplies Hyprland border colors via `hyprctl`
 - Sets the GTK theme/color-scheme, recolors nm-applet icons
-- Reloads waybar, kitty, yazi, dunst, and tmux so every themed app picks up the new colors
+- Reloads kitty, yazi, dunst, and tmux so every themed app picks up the new colors (the Quickshell bar/sidebar hot-reload themselves on `Colors.qml` change)
 
 Calling `matugen` directly regenerates the palette but skips all of this — the desktop ends up half-themed. Always tell the user to run `wallpaper <image>`, or run it yourself if asked to apply/test a change. If no new image is given, reuse the path stored in `~/.config/hypr/.wallpaper`.
 
@@ -21,7 +21,7 @@ Matugen output files are generated — don't hand-edit them, the next `wallpaper
 
 | Template | Output |
 |---|---|
-| waybar.css | ~/.config/waybar/colors.css |
+| quickshell.qml | ~/.config/quickshell/Colors.qml |
 | kitty.conf | ~/.config/kitty/colors.conf |
 | rofi.rasi | ~/.config/rofi/colors.rasi |
 | hyprland.lua | ~/.config/hypr/user/colors.lua |

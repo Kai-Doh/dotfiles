@@ -7,9 +7,9 @@ hyprpaper
 hyprlock
 xdg-desktop-portal-hyprland
 
-# ── Status bar ────────────────────────────────────────────────────────────────
-waybar
-hyprwat-bin         # themed popup menus: waybar brightness + volume click targets
+# ── Status bar & shell ────────────────────────────────────────────────────────
+quickshell          # top bar + Claude sidebar (~/.config/quickshell)
+hyprwat-bin         # themed popup menus: brightness + volume click targets
 
 # ── Terminal & multiplexer ────────────────────────────────────────────────────
 kitty
