@@ -16,6 +16,9 @@ hl.on("hyprland.start", function()
     -- Network Manager tray applet
     hl.exec_cmd("nm-applet --indicator")
 
+    -- Claude sidebar (quickshell); toggle with Super+A
+    hl.exec_cmd("qs")
+
     -- subtui in the special "magic" workspace
     hl.exec_cmd("kitty --title subtui -e subtui", { workspace = "special:magic silent" })
 
@@ -26,7 +29,5 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("sh -c 'sleep 3 && hyprctl dispatch togglespecialworkspace magic && sleep 0.1 && hyprctl dispatch focuswindow title:cava && hyprctl dispatch splitratio exact 0.25 && hyprctl dispatch togglespecialworkspace magic'")
 end)
 
--- Refresh waybar's custom workspace buttons (custom/ws*) on any workspace change
-hl.on("workspace.active",  function() hl.exec_cmd("pkill -RTMIN+10 waybar") end)
-hl.on("workspace.created", function() hl.exec_cmd("pkill -RTMIN+10 waybar") end)
-hl.on("workspace.removed", function() hl.exec_cmd("pkill -RTMIN+10 waybar") end)
+-- (Status bar is now the Quickshell bar launched by `qs` above; it reads
+-- Hyprland workspaces natively, so no manual refresh hooks are needed.)

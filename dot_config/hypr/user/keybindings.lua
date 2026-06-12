@@ -22,6 +22,9 @@ hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("cliphist list | rofi -dmenu | cliphi
 -- Keybind viewer
 hl.bind(mainMod .. " + K", hl.dsp.exec_cmd("python3 ~/.config/keybinds-viewer/keybinds_viewer.py"))
 
+-- Claude sidebar (quickshell)
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("qs ipc call sidebar toggle"))
+
 -- Move focus
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left"  }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))

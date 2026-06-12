@@ -55,8 +55,8 @@ if [[ "$(cat "$ICON_COLOR_CACHE" 2>/dev/null)" != "$PRIMARY" ]]; then
     nm-applet --indicator &>/dev/null &
 fi
 
-# Reload waybar, kitty, yazi, dunst, and tmux
-systemctl --user restart waybar &>/dev/null || true
+# Reload kitty, yazi, dunst, and tmux
+# (The Quickshell bar/sidebar hot-reload automatically when Colors.qml changes.)
 pkill -USR1 kitty 2>/dev/null || true
 pkill yazi 2>/dev/null || true   # no hot-reload; close so next open picks up new theme
 systemctl --user reload dunst &>/dev/null || true
