@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Called by Sunshine's global_prep_cmd to mark whether a stream is active.
+set -euo pipefail
+
+flag="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/sunshine-streaming"
+
+case "${1:-}" in
+    start) touch "$flag" ;;
+    stop)  rm -f "$flag" ;;
+    *) echo "usage: $(basename "$0") start|stop" >&2; exit 1 ;;
+esac

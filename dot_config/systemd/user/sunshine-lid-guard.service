@@ -1,0 +1,13 @@
+[Unit]
+Description=Inhibit lid-switch suspend while Sunshine is streaming on AC power
+PartOf=graphical-session.target
+After=graphical-session.target
+Wants=graphical-session.target
+
+[Service]
+ExecStart=/home/kai/.local/bin/sunshine-lid-guard
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=graphical-session.target

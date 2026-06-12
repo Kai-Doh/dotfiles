@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+# Holds a systemd-logind "handle-lid-switch" inhibitor only while the
+# laptop is on AC power AND Sunshine has an active streaming session.
+# This lets the lid be closed without suspending while streaming via
+# Moonlight, but keeps normal suspend-on-lid-close otherwise.
+#
+# If AC power is lost while streaming, send a warning notification. If
+# it isn't restored within 60s AND the lid is closed (so no lid-switch
+# event will fire to suspend normally), suspend explicitly.
+set -uo pipefail
+
+flag="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/sunshine-streaming"
+ac_online="/sys/class/power_supply/AC/online"
+lid_state="/proc/acpi/button/lid/LID/state"
+grace_period=60
+
+inhibit_pid=""
+ac_lost_at=""
+
+cleanup() {
+    [[ -n "$inhibit_pid" ]] && kill "$inhibit_pid" 2>/dev/null
+}
+trap cleanup EXIT
+
+while true; do
+    on_ac=$(cat "$ac_online" 2>/dev/null || echo 0)
+    streaming=0
+    [[ -e "$flag" ]] && streaming=1
+
+    if [[ "$on_ac" == "1" ]]; then
+        if [[ -n "$ac_lost_at" ]]; then
+            notify-send -u normal "Sunshine" "AC power reconnected."
+            ac_lost_at=""
+        fi
+
+        if [[ "$streaming" == "1" ]]; then
+            if [[ -z "$inhibit_pid" ]] || ! kill -0 "$inhibit_pid" 2>/dev/null; then
+                systemd-inhibit --what=handle-lid-switch \
+                    --who="sunshine-lid-guard" \
+                    --why="Streaming via Sunshine on AC power" \
+                    --mode=block \
+                    sleep infinity &
+                inhibit_pid=$!
+            fi
+        else
+            if [[ -n "$inhibit_pid" ]] && kill -0 "$inhibit_pid" 2>/dev/null; then
+                kill "$inhibit_pid" 2>/dev/null
+                wait "$inhibit_pid" 2>/dev/null
+            fi
+            inhibit_pid=""
+        fi
+    else
+        # On battery: release the inhibitor so normal lid-close suspend applies.
+        if [[ -n "$inhibit_pid" ]] && kill -0 "$inhibit_pid" 2>/dev/null; then
+            kill "$inhibit_pid" 2>/dev/null
+            wait "$inhibit_pid" 2>/dev/null
+        fi
+        inhibit_pid=""
+
+        if [[ "$streaming" == "1" ]]; then
+            now=$(date +%s)
+            if [[ -z "$ac_lost_at" ]]; then
+                ac_lost_at=$now
+                notify-send -u critical "Sunshine: AC power disconnected" \
+                    "Streaming on battery now. If the lid is closed and power isn't restored within ${grace_period}s, the laptop will suspend."
+            else
+                elapsed=$((now - ac_lost_at))
+                lid=$(cat "$lid_state" 2>/dev/null)
+                if (( elapsed >= grace_period )) && [[ "$lid" == *closed* ]]; then
+                    notify-send -u critical "Sunshine: Suspending" \
+                        "AC power not restored within ${grace_period}s while lid closed - suspending now."
+                    systemctl suspend
+                    ac_lost_at=""
+                fi
+            fi
+        else
+            ac_lost_at=""
+        fi
+    fi
+
+    sleep 5
+done

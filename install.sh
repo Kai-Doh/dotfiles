@@ -62,7 +62,7 @@ fi
 # ── 7. Systemd user services ──────────────────────────────────────────────────
 echo "==> Enabling systemd user services..."
 systemctl --user daemon-reload
-systemctl --user enable --now waybar.service tmux.service
+systemctl --user enable --now waybar.service tmux.service sunshine-lid-guard.service
 
 # ── 8. First wallpaper run ────────────────────────────────────────────────────
 WALL="$HOME/Pictures/Wallpapers/nebula.jpg"
