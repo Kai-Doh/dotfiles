@@ -9,6 +9,7 @@ xdg-desktop-portal-hyprland
 
 # ── Status bar ────────────────────────────────────────────────────────────────
 waybar
+hyprwat-bin         # themed popup menus: waybar brightness + volume click targets
 
 # ── Terminal & multiplexer ────────────────────────────────────────────────────
 kitty

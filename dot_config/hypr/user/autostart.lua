@@ -25,3 +25,8 @@ hl.on("hyprland.start", function()
     -- once cava is open, set its split to 25% (briefly toggle workspace to apply)
     hl.exec_cmd("sh -c 'sleep 3 && hyprctl dispatch togglespecialworkspace magic && sleep 0.1 && hyprctl dispatch focuswindow title:cava && hyprctl dispatch splitratio exact 0.25 && hyprctl dispatch togglespecialworkspace magic'")
 end)
+
+-- Refresh waybar's custom workspace buttons (custom/ws*) on any workspace change
+hl.on("workspace.active",  function() hl.exec_cmd("pkill -RTMIN+10 waybar") end)
+hl.on("workspace.created", function() hl.exec_cmd("pkill -RTMIN+10 waybar") end)
+hl.on("workspace.removed", function() hl.exec_cmd("pkill -RTMIN+10 waybar") end)

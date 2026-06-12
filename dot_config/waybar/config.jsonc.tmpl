@@ -2,17 +2,22 @@
     "layer": "top",
     "position": "top",
     // Choose the order of the modules
-    "modules-left": ["hyprland/workspaces"],
+    "modules-left": ["custom/ws1", "custom/ws2", "custom/ws3", "custom/ws4", "custom/ws5", "custom/ws6", "custom/ws7", "custom/ws8", "custom/ws9", "custom/ws10"],
     "modules-center": ["clock"],
     "modules-right": ["custom/music", "pulseaudio", "backlight", "battery", "custom/updates", "tray", "custom/lock", "custom/power"],
-    "hyprland/workspaces": {
-         "disable-scroll": true,
-         "sort-by-name": true,
-         "format": " {name} ",
-         "format-icons": {
-             "default": "",
-         },
-     },
+    // Workspaces: custom buttons because Lua-Hyprland rejects the native
+    // module's "dispatch workspace N"; see workspaces.sh. Each button hides
+    // itself when that workspace is empty, mirroring a dynamic workspace bar.
+    "custom/ws1":  { "exec": "~/.config/waybar/workspaces.sh status 1",  "return-type": "json", "interval": "once", "signal": 10, "format": "{}", "on-click": "~/.config/waybar/workspaces.sh go 1",  "tooltip": false },
+    "custom/ws2":  { "exec": "~/.config/waybar/workspaces.sh status 2",  "return-type": "json", "interval": "once", "signal": 10, "format": "{}", "on-click": "~/.config/waybar/workspaces.sh go 2",  "tooltip": false },
+    "custom/ws3":  { "exec": "~/.config/waybar/workspaces.sh status 3",  "return-type": "json", "interval": "once", "signal": 10, "format": "{}", "on-click": "~/.config/waybar/workspaces.sh go 3",  "tooltip": false },
+    "custom/ws4":  { "exec": "~/.config/waybar/workspaces.sh status 4",  "return-type": "json", "interval": "once", "signal": 10, "format": "{}", "on-click": "~/.config/waybar/workspaces.sh go 4",  "tooltip": false },
+    "custom/ws5":  { "exec": "~/.config/waybar/workspaces.sh status 5",  "return-type": "json", "interval": "once", "signal": 10, "format": "{}", "on-click": "~/.config/waybar/workspaces.sh go 5",  "tooltip": false },
+    "custom/ws6":  { "exec": "~/.config/waybar/workspaces.sh status 6",  "return-type": "json", "interval": "once", "signal": 10, "format": "{}", "on-click": "~/.config/waybar/workspaces.sh go 6",  "tooltip": false },
+    "custom/ws7":  { "exec": "~/.config/waybar/workspaces.sh status 7",  "return-type": "json", "interval": "once", "signal": 10, "format": "{}", "on-click": "~/.config/waybar/workspaces.sh go 7",  "tooltip": false },
+    "custom/ws8":  { "exec": "~/.config/waybar/workspaces.sh status 8",  "return-type": "json", "interval": "once", "signal": 10, "format": "{}", "on-click": "~/.config/waybar/workspaces.sh go 8",  "tooltip": false },
+    "custom/ws9":  { "exec": "~/.config/waybar/workspaces.sh status 9",  "return-type": "json", "interval": "once", "signal": 10, "format": "{}", "on-click": "~/.config/waybar/workspaces.sh go 9",  "tooltip": false },
+    "custom/ws10": { "exec": "~/.config/waybar/workspaces.sh status 10", "return-type": "json", "interval": "once", "signal": 10, "format": "{}", "on-click": "~/.config/waybar/workspaces.sh go 10", "tooltip": false },
     "tray": {
         "icon-size": 21,
         "spacing": 10
@@ -35,7 +40,10 @@
     "backlight": {
         "device": "{{ .backlight }}",
         "format": "{icon}",
-        "format-icons": ["󰃞", "󰃞", "󰃞", "󰃟", "󰃟", "󰃟", "󰃠", "󰃠", "󰃠"]
+        "format-icons": ["󰃞", "󰃞", "󰃞", "󰃟", "󰃟", "󰃟", "󰃠", "󰃠", "󰃠"],
+        "on-click": "~/.config/waybar/brightness-menu.sh",
+        "on-scroll-up": "brightnessctl set 5%+",
+        "on-scroll-down": "brightnessctl set 5%-"
     },
     "battery": {
         "states": {
@@ -54,7 +62,10 @@
         "format-icons": {
             "default": ["󰕿", "󰖀", "󰕾"]
         },
-        "on-click": "pavucontrol"
+        "on-click": "hyprwat --audio",
+        "on-click-right": "pavucontrol",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
     },
     "custom/updates": {
         "exec": "~/.config/waybar/update-count.sh",
