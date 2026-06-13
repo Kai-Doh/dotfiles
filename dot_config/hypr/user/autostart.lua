@@ -22,11 +22,8 @@ hl.on("hyprland.start", function()
     -- subtui in the special "magic" workspace
     hl.exec_cmd("kitty --title subtui -e subtui", { workspace = "special:magic silent" })
 
-    -- cava below subtui (window rule handles workspace routing)
-    hl.exec_cmd("sh -c 'sleep 1 && hyprctl dispatch focuswindow title:subtui && hyprctl dispatch layoutmsg \"preselect d\" && kitty --title cava -e cava'")
-
-    -- once cava is open, set its split to 25% (briefly toggle workspace to apply)
-    hl.exec_cmd("sh -c 'sleep 3 && hyprctl dispatch togglespecialworkspace magic && sleep 0.1 && hyprctl dispatch focuswindow title:cava && hyprctl dispatch splitratio exact 0.25 && hyprctl dispatch togglespecialworkspace magic'")
+    -- (cava now runs as the desktop background visualizer via quickshell —
+    -- see ~/.config/quickshell/Visualizer.qml — so it no longer lives here.)
 end)
 
 -- (Status bar is now the Quickshell bar launched by `qs` above; it reads

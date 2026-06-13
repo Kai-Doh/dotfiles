@@ -25,18 +25,18 @@ channels        = stereo
 mono_option     = average
 
 [color]
-background = '#4b2b30'
-foreground = '#ffb6c6'
+background = '#333340'
+foreground = '#c1c7ff'
 gradient   = 1
 gradient_count = 8
-gradient_color_1 = '#4b2b30'
-gradient_color_2 = '#594146'
-gradient_color_3 = '#9f4259'
-gradient_color_4 = '#e33b6f'
-gradient_color_5 = '#ffb6c6'
-gradient_color_6 = '#e7c6ca'
-gradient_color_7 = '#f9e0e2'
-gradient_color_8 = '#ffffff'
+gradient_color_1 = '#333340'
+gradient_color_2 = '#474751'
+gradient_color_3 = '#585d8a'
+gradient_color_4 = '#3c4abd'
+gradient_color_5 = '#c1c7ff'
+gradient_color_6 = '#ffbe93'
+gradient_color_7 = '#e7e4ed'
+gradient_color_8 = '#d7d9ff'
 
 [smoothing]
 integral      = 77

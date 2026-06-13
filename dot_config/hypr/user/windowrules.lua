@@ -47,10 +47,3 @@ hl.window_rule({
     decorate    = false,
     border_size = 0,
 })
-
--- cava companion on special:magic
-hl.window_rule({
-    name      = "cava-special-magic",
-    match     = { title = "^cava$" },
-    workspace = "special:magic silent",
-})

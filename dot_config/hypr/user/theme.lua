@@ -6,7 +6,7 @@ hl.config({
         border_size = 2,
 
         col = {
-            active_border   = { colors = {"rgba(" .. primaryAlpha .. "ee)", "rgba(" .. secondaryAlpha .. "ee)"}, angle = 45 },
+            active_border   = { colors = {"rgba(" .. primaryAlpha .. "ee)", "rgba(" .. tertiaryAlpha .. "ee)", "rgba(" .. secondaryAlpha .. "ee)"}, angle = 45 },
             inactive_border = "rgba(" .. surfaceAlpha .. "aa)",
         },
 

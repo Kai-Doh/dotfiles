@@ -16,6 +16,12 @@ ShellRoot {
     // is open — the notification already shows in its list there.
     NotifService { id: notifs; suppressPopups: ccPanel.visible }
 
+    // Desktop audio visualizer on every screen (Bottom layer, behind windows).
+    Variants {
+        model: Quickshell.screens
+        Visualizer {}
+    }
+
     // Top bar on every screen.
     Variants {
         model: Quickshell.screens

@@ -9,6 +9,8 @@ QtObject {
     readonly property color primary:     "{{colors.primary.default.hex}}"
     readonly property color primaryFg:   "{{colors.on_primary.default.hex}}"
     readonly property color secondary:   "{{colors.secondary.default.hex}}"
+    readonly property color tertiary:    "{{colors.tertiary.default.hex}}"
+    readonly property color tertiaryFg:  "{{colors.on_tertiary.default.hex}}"
     readonly property color outline:     "{{colors.outline_variant.default.hex}}"
     readonly property color error:       "{{colors.error.default.hex}}"
 }

@@ -89,7 +89,9 @@ PanelWindow {
                     colors: c
                     notif: modelData
                     timeText: ""
-                    onClosed: { modelData.dismiss(); win.remove(modelData); }
+                    // Just dismiss: the notification then emits `closed`, which
+                    // the Connections block above catches and removes the toast.
+                    onClosed: modelData.dismiss()
                 }
             }
         }
