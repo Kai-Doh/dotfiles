@@ -4,13 +4,13 @@ local mainMod = "SUPER"
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + escape", hl.dsp.exec_cmd("hyprlock"))  -- moved off L (now focus-right)
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + D", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + backslash", hl.dsp.layout("togglesplit"))  -- moved off J (now focus-down)
 
 -- Screenshots (grim + slurp) — saves to file, copies to clipboard, sends notification with preview
 hl.bind(mainMod .. " + P",         hl.dsp.exec_cmd("FILE=$HOME/Pictures/Screenshot/$(date +'%Y%m%d_%H%M%S').png; grim -g \"$(hyprctl activewindow -j | jq -r '\"\\(.at[0]),\\(.at[1]) \\(.size[0])x\\(.size[1])\"')\" - | tee \"$FILE\" | wl-copy && notify-send -i \"$FILE\" 'Screenshot' 'Copied to clipboard'"))
@@ -20,7 +20,7 @@ hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("GEOM=$(slurp) && FILE=$HOME/
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("cliphist list | rofi -dmenu | cliphist decode | wl-copy"))
 
 -- Keybind viewer
-hl.bind(mainMod .. " + K", hl.dsp.exec_cmd("python3 ~/.config/keybinds-viewer/keybinds_viewer.py"))
+hl.bind(mainMod .. " + slash", hl.dsp.exec_cmd("python3 ~/.config/keybinds-viewer/keybinds_viewer.py"))  -- moved off K (now focus-up)
 
 -- Claude sidebar (quickshell)
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("qs ipc call sidebar toggle"))
@@ -28,13 +28,25 @@ hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("qs ipc call sidebar toggle"))
 -- Control center (quickshell)
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("qs ipc call controlcenter toggle"))
 
--- Move focus
+-- Move focus (vim keys — primary)
+hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left"  }))
+hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down"  }))
+hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up"    }))
+hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
+
+-- Move focus (arrow keys — fallback)
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left"  }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up"    }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down"  }))
 
--- Resize active window
+-- Move window (vim keys)
+hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.move({ direction = "left"  }))
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.move({ direction = "down"  }))
+hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.move({ direction = "up"    }))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
+
+-- Resize active window (Super+Shift+arrows)
 hl.bind(mainMod .. " + SHIFT + left",  hl.dsp.window.resize({ x = -20, y = 0,   relative = true }), { repeating = true })
 hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.resize({ x = 20,  y = 0,   relative = true }), { repeating = true })
 hl.bind(mainMod .. " + SHIFT + up",    hl.dsp.window.resize({ x = 0,   y = -20, relative = true }), { repeating = true })
