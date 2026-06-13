@@ -1,7 +1,8 @@
 import QtQuick
 import Quickshell
+import "../"
 
-// A panel that drops below a bar module. Square corners, 2px primary border,
+// A panel that drops below a bar module. Square corners, gradient border,
 // matugen background — matches the sidebar styling. Toggle via `open`.
 // Put content as children; they're laid into a 10px-margin body area.
 PopupWindow {
@@ -26,9 +27,18 @@ PopupWindow {
     Rectangle {
         anchors.fill: parent
         color: pop.colors.background
-        border.width: 2
-        border.color: pop.colors.primary
         radius: 0
+
+        // Gradient frame matching the Hyprland window border.
+        GradientBorder {
+            anchors.fill: parent
+            z: 100
+            borderWidth: 2
+            radius: 0
+            color1: pop.colors.primary
+            color2: pop.colors.tertiary
+            color3: pop.colors.secondary
+        }
 
         Item {
             id: body

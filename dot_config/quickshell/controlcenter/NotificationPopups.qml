@@ -93,6 +93,17 @@ PanelWindow {
                     // the Connections block above catches and removes the toast.
                     onClosed: modelData.dismiss()
                 }
+
+                // Gradient frame matching the Hyprland window border.
+                GradientBorder {
+                    anchors.fill: card
+                    z: 100
+                    borderWidth: 2
+                    radius: 0
+                    color1: c.primary
+                    color2: c.tertiary
+                    color3: c.secondary
+                }
             }
         }
     }

@@ -18,11 +18,20 @@ Rectangle {
     property string openDialog: "" // "", "wifi", "bluetooth"
 
     color: c.background
-    border.width: 2
-    border.color: c.primary
     radius: 0
 
     Colors { id: c }
+
+    // Gradient frame matching the Hyprland window border.
+    GradientBorder {
+        anchors.fill: parent
+        z: 100
+        borderWidth: 2
+        radius: 0
+        color1: c.primary
+        color2: c.tertiary
+        color3: c.secondary
+    }
     readonly property var colors: c
 
     // --- Fire-and-forget launcher (lock / power) -----------------------
